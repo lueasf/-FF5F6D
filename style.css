@@ -1,0 +1,95 @@
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #e29292;
+    padding: clamp(20px, 20vw, 200px) 20px 0;
+}
+
+.container {
+    max-width: 400px;
+    margin-inline: auto;
+}
+
+.input-group {
+    display: flex;
+    width: 100%;
+    border-radius: 15px;
+    outline: 2px solid #f1f1f1; /*des contours*/
+    margin: 15px 0;
+    font-weight: bold;
+    position: relative;
+}
+
+.input-group input {
+    outline: none;
+    cursor: pointer;
+
+}
+
+.input-group label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 25px;
+    padding: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="color"]{
+    visibility: hidden; /*pour cacher l'input color*/
+}
+
+.range-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px auto; /*30px en haut et en bas et 0*/
+}
+
+.range-group label {
+    display: flex;
+    background: #f1f1f1;     
+    justify-content: space-between; 
+    font-size: 20px;
+    max-width: 180px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+input[type="range"] {
+    width: 80%; /* taille du range */
+    margin-top: 18px; /* marge entre le range et le boutton */
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.buttons-container button{
+    font-size: 20px;
+    min-width: 150px;
+    padding:  12px 0;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    border: none; 
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.random-btn {
+    margin-left: 30px;
+}
