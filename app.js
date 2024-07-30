@@ -2,7 +2,7 @@ const colorLabels = [...document.querySelectorAll('.input-group label')]; // nod
 const colorPickerInputs = [...document.querySelectorAll("input[type='color']")]; // nodelist des inputs de type color
 const rangeLabelValue = document.querySelector('.orientation-value'); // input range pour l'orientation
 
-const gradientData = { angle: 90, colors: ["#FF5F6D", "#FFC371"] }; // données de base pour le gradient
+const gradientData = { angle: 90, colors: ["#111111", "#2FC371"] }; // données de base pour le gradient
 
 
 // FUNC 1 METTRE LES VALS À JOUR
@@ -24,5 +24,46 @@ function populateUI() {
 
     // maj de l'angle
     rangeLabelValue.textContent = `${gradientData.angle}°`
+
+    adaptInputsColor();
 }
 populateUI();
+
+// FUNC 2 CHANGER LA COULEUR DU TEXTE EN FUNC DU BG
+// formule du YIQ : (red*299 + green*587 + blue*144) / 1000; luminosité
+function adaptInputsColor(){
+    colorLabels.forEach(label => {
+        const hexColor = label.textContent.replace("#", ""); //on prends le txt du label sans le #
+        const red = parseInt(hexColor.slice(0,2),16); // les 2 prem lettres du rouge et on les met de b16 à b10
+        const green = parseInt(hexColor.slice(2,4),16);
+        const blue = parseInt(hexColor.slice(4,6),16);
+
+        const yiq = (red*299 + green*587 + blue*144) / 1000;
+
+        if(yiq >= 128){
+            label.style.color = "#111"; // si lumineux, lettres en noir
+        }else {
+            label.style.color = "#F1F1F1"; // sinon lettre en blanc
+        }
+
+    })
+}
+
+const rangeInput = document.querySelector(".inp-range");
+rangeInput.addEventListener("input", handleOrientation);
+
+// FUNC 3 GÉRER LE RANGE
+function handleOrientation(){
+    gradientData.angle = rangeInput.value;
+    rangeLabelValue.textContent = `${gradientData.angle}°`;
+    populateUI(); // pour modifier l'orientation
+}
+
+colorPickerInputs.forEach(input => input.addEventListener("input",colorInputModification));
+// FUNC 4 MODIFIER LES COULEURS
+function colorInputModification(e){
+    const currentInput = e.target; // input qui a déclenché l'event
+    const currentIndex = colorPickerInputs.indexOf(currentInput); // index de l'input trigger = 1 ou 2
+    gradientData.colors[currentIndex] = currentInput.value.toUpperCase(); // maj de la couleur dans le tableau
+    populateUI();
+}
