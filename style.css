@@ -83,6 +83,7 @@ input[type="color"]{
 }
 
 input[type="range"] {
+    cursor: pointer;
     width: 80%; /* taille du range */
     margin-top: 18px; /* marge entre le range et le boutton */
 }
@@ -95,6 +96,7 @@ input[type="range"] {
 
 .buttons-container button{
     font-size: 20px;
+    cursor: pointer;
     min-width: 150px;
     padding:  12px 0;
     border: none;

@@ -29,6 +29,7 @@ function populateUI() {
 }
 populateUI();
 
+
 // FUNC 2 CHANGER LA COULEUR DU TEXTE EN FUNC DU BG
 // formule du YIQ : (red*299 + green*587 + blue*144) / 1000; luminosité
 function adaptInputsColor(){
@@ -52,6 +53,7 @@ function adaptInputsColor(){
 const rangeInput = document.querySelector(".inp-range");
 rangeInput.addEventListener("input", handleOrientation);
 
+
 // FUNC 3 GÉRER LE RANGE
 function handleOrientation(){
     gradientData.angle = rangeInput.value;
@@ -59,11 +61,34 @@ function handleOrientation(){
     populateUI(); // pour modifier l'orientation
 }
 
+
 colorPickerInputs.forEach(input => input.addEventListener("input",colorInputModification));
+
+
 // FUNC 4 MODIFIER LES COULEURS
 function colorInputModification(e){
     const currentInput = e.target; // input qui a déclenché l'event
     const currentIndex = colorPickerInputs.indexOf(currentInput); // index de l'input trigger = 1 ou 2
     gradientData.colors[currentIndex] = currentInput.value.toUpperCase(); // maj de la couleur dans le tableau
     populateUI();
+}
+
+
+const copyBtn = document.querySelector(".copy-btn");
+copyBtn.addEventListener("click", handleGradientCopy);
+let lock = false;
+
+
+// FUNC 5 COPIER LE GRAD
+function handleGradientCopy(){
+    const gradient = `linear-gradient(${gradientData.angle}deg,${gradientData.colors[0]},${gradientData.colors[1]}))`;
+    navigator.clipboard.writeText(gradient); // meth pour copier dans le clipboard
+}
+
+
+const randomGradientBtn = document.querySelector(".random-btn");
+randomGradientBtn.addEventListener("click", createRandomGradient);
+
+function createRandomGradient(){
+    
 }
