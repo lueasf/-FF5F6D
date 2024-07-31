@@ -89,6 +89,16 @@ function handleGradientCopy(){
 const randomGradientBtn = document.querySelector(".random-btn");
 randomGradientBtn.addEventListener("click", createRandomGradient);
 
+// FUNC 6 CRÉER UN GRADIENT RANDOM
 function createRandomGradient(){
-    
+    // avec une boucle for on 
+    for(let i=0; i< colorLabels.length; i++) {
+        // console.log(colorLabels.length);
+        randomColor = `#${Math.floor(Math.random()* 16777215).toString(16)}`;
+        gradientData.colors[i] = randomColor.toUpperCase();
+    }
+    populateUI();
 }
+// avec Math.random() entre 0 et 1, on multiplie par 16777215 pour avoir un nb entre 0 et FFFFFF.
+// on prends la partie ent et on convertit en hexa.
+// on met a jour les 2 couleurs et le tout.
